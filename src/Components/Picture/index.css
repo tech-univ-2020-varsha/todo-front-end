@@ -1,0 +1,15 @@
+.picture{
+    display: flex;
+    border-radius:50%;
+    padding: 1em;
+    max-width: 40%;
+    align-self: center;
+   
+} 
+
+.message{
+    display: flex;
+    color: rgb(55, 176, 224);
+    padding-left:3em;
+
+}

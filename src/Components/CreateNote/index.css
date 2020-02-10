@@ -1,0 +1,51 @@
+
+.new-note{
+    display: flex;
+    background-color: white;
+    padding:1em;
+    margin: 1em;
+    color: #5cc8f3;
+    text-align: center;
+    align-self: center;
+    border-radius: 5%;
+    width: 80%;
+    padding: 1em;
+    height: 20%;
+}
+
+.New-Notes-bar{
+    padding-top:1em;
+    display: flex;
+    flex-direction: column;
+    flex:2;
+  
+    background: -webkit-linear-gradient(#FFF, #5cc8f3);
+    border-color:#5cc8f3 ;
+    height: 100%;
+    width: 100%;
+    margin: 1rem;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.note-text{
+    width: 100%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    font-weight: bold;
+    color: rgb(60, 177, 231);
+}
+
+.num-of-chars{
+    display: flex;
+    color: white;
+    font-weight: bold;
+    align-self: flex-end;
+    padding-right: 1em;
+}

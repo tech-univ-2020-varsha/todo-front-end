@@ -1,30 +1,54 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Profile from './Components/Profile';
+import NotesList from './Components/NotesList';
+import CreateNote from './Components/CreateNote';
 
-class App extends Component  {
-  render()
-  {
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayList: true,
+      listOfNote: [],
+    };
+
+    this.displayListStateFalse = () => {
+      this.setState({
+        displayList: false,
+      });
+    };
+    this.displayListStateTrue = () => {
+      const { listOfNote } = this.state;
+      const newNote = document.getElementById('note-description').value;
+      this.setState({
+        displayList: true,
+        listOfNote: [...listOfNote, newNote],
+      });
+    };
+  }
+
+  render() {
+    const { displayList } = this.state;
+    const { listOfNote } = this.state;
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+
+        <Profile />
+        {
+         displayList === true
+           ? (
+             <NotesList
+               displayList={displayList}
+               displayListStateFalse={this.displayListStateFalse}
+               listOfNote={listOfNote}
+             />
+           )
+           : <CreateNote displayListStateTrue={this.displayListStateTrue} />
+        }
+
       </div>
     );
   }
-  
 }
 
 export default App;

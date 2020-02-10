@@ -1,0 +1,18 @@
+.note{
+    display: flex;
+    background-color: white;
+    padding:1em;
+    margin: 1em;
+    width: 90%;
+    justify-content: space-between;
+}
+
+.note-content{
+    display: flex;
+    font-weight: bold;
+    text-align: center;
+    color: #5cc8f3;
+}
+
+
+

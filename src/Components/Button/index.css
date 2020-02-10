@@ -1,0 +1,15 @@
+.button{
+    display: flex;
+    border-radius: 15%;
+    justify-content: center;
+    background-color: white;
+    text-emphasis-color: rgb(64, 192, 231);
+}
+.btn-text{
+    color: rgb(71, 168, 224);
+    padding: 1rem;
+    font-weight: bold;
+    font-size: 1rem;
+    outline: none;
+    border: none;
+}

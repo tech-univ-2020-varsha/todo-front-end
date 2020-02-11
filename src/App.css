@@ -1,24 +1,32 @@
-
-.Profile-Bar{
-  display:flex;
-  flex-direction: column;
-  width: 40%;
-  padding-left: 2em;
-    max-width: 20%;
-    border-style: solid;
-    border-color:#5CC8F3 ;
-    height: 100%;
-    justify-content: center;
-    flex:2
-}
-
 .App{
   display: flex;
   flex-wrap: wrap;
+  height: 100%;
 }
 
 
 
-body > #root > div {
+/* body > #root > div {
   height: 100vh;
+} */
+
+html,body{
+height: 100%;
+margin: 0;
 }
+#root{
+  height: 100%;
+  margin: 0;
+}
+
+@media only screen and (width: 500px) {
+  
+  .App {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    flex-direction: column;
+  }
+}
+
+

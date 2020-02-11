@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import axios from 'axios';
 import Profile from './Components/Profile';
 import NotesList from './Components/NotesList';
 import CreateNote from './Components/CreateNote';
@@ -17,14 +18,26 @@ class App extends Component {
         displayList: false,
       });
     };
-    this.displayListStateTrue = () => {
-      const { listOfNote } = this.state;
-      const newNote = document.getElementById('note-description').value;
+    this.displayListStateTrue = async () => {
+      const notesData = await this.getNoteList();
+      // console.log([...notesData]);
       this.setState({
         displayList: true,
-        listOfNote: [...listOfNote, newNote],
+        listOfNote: notesData,
       });
     };
+  }
+
+  getNoteList=async () => {
+    const result = await axios.get('http://localhost:8080/notes');
+    return result.data;
+  }
+
+  componentDidMount=async () => {
+    const notesData = await this.getNoteList();
+    this.setState({
+      listOfNote: notesData,
+    });
   }
 
   render() {

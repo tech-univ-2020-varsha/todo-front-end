@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.css';
+import propTypes from 'prop-types';
 import Button from '../Button';
 import Note from '../Note';
 
@@ -15,7 +16,7 @@ function NotesList(props) {
       </div>
       <div className="notes-list" id="style-1">
         {
-listOfNote.map((note) => <Note noteContent={note} />)
+          listOfNote.map((note) => <Note noteContent={note.description} />)
         }
 
       </div>
@@ -25,3 +26,9 @@ listOfNote.map((note) => <Note noteContent={note} />)
 }
 
 export default NotesList;
+
+
+NotesList.propTypes = {
+  listOfNote: propTypes.arrayOf.isRequired,
+  displayListStateFalse: propTypes.func.isRequired,
+};

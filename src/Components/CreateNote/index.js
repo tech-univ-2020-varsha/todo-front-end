@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './index.css';
+import propTypes from 'prop-types';
 import Button from '../Button';
 
 class CreateNote extends Component {
@@ -13,8 +14,27 @@ class CreateNote extends Component {
         numOfChars: e.target.value.length,
       });
     };
-    this.addNote = () => {
-      props.displayListStateTrue();
+    this.addNote = async () => {
+      const newNote = document.getElementById('note-description').value;
+      if (newNote) {
+        const http = new XMLHttpRequest();
+        const url = 'http://localhost:8080/notes';
+        const payload = {
+          title: 'new note',
+          description: newNote,
+        };
+        http.open('POST', url);
+        http.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        http.onreadystatechange = () => { // Call a function when the state changes.
+          if (http.readyState === 4 && http.status === 200) {
+            props.displayListStateTrue();
+            console.log(http.responseText);
+          }
+        };
+        http.send(JSON.stringify(payload));
+      } else {
+        alert('Please fill the note content');
+      }
     };
   }
 
@@ -43,3 +63,7 @@ class CreateNote extends Component {
 }
 
 export default CreateNote;
+
+CreateNote.propTypes = {
+  displayListStateTrue: propTypes.func.isRequired,
+};

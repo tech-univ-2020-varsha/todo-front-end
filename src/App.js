@@ -18,12 +18,12 @@ class App extends Component {
         displayList: false,
       });
     };
-    this.displayListStateTrue = async () => {
-      const notesData = await this.getNoteList();
+    this.displayListStateTrue = async (newNote) => {
+      const { listOfNote } = this.state;
       // console.log([...notesData]);
       this.setState({
         displayList: true,
-        listOfNote: notesData,
+        listOfNote: [newNote, ...listOfNote],
       });
     };
   }
@@ -31,6 +31,17 @@ class App extends Component {
   getNoteList=async () => {
     const result = await axios.get('http://localhost:8080/notes');
     return result.data;
+  }
+
+  deleteNote=async (noteId) => {
+    const { listOfNote } = this.state;
+    console.log(listOfNote);
+    const deleteUrl = `http://localhost:8080/notes/${noteId}`;
+    await axios.delete(deleteUrl);
+    this.setState({
+      displayList: true,
+      listOfNote: listOfNote.filter((note) => note.id !== noteId),
+    });
   }
 
   componentDidMount=async () => {
@@ -43,6 +54,7 @@ class App extends Component {
   render() {
     const { displayList } = this.state;
     const { listOfNote } = this.state;
+
     return (
       <div className="App">
 
@@ -54,6 +66,7 @@ class App extends Component {
                displayList={displayList}
                displayListStateFalse={this.displayListStateFalse}
                listOfNote={listOfNote}
+               deleteNote={this.deleteNote}
              />
            )
            : <CreateNote displayListStateTrue={this.displayListStateTrue} />

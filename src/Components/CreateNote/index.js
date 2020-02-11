@@ -27,8 +27,7 @@ class CreateNote extends Component {
         http.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
         http.onreadystatechange = () => { // Call a function when the state changes.
           if (http.readyState === 4 && http.status === 200) {
-            props.displayListStateTrue();
-            console.log(http.responseText);
+            props.displayListStateTrue(JSON.parse(http.responseText));
           }
         };
         http.send(JSON.stringify(payload));

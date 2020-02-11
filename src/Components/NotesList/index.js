@@ -6,6 +6,7 @@ import Note from '../Note';
 
 function NotesList(props) {
   const { listOfNote } = props;
+  const { deleteNote } = props;
   const createNewNote = () => {
     props.displayListStateFalse();
   };
@@ -16,7 +17,7 @@ function NotesList(props) {
       </div>
       <div className="notes-list" id="style-1">
         {
-          listOfNote.map((note) => <Note noteContent={note.description} />)
+          listOfNote.map((note) => <Note noteContent={note.description} noteId={note.id} deleteNote={deleteNote} />)
         }
 
       </div>
@@ -31,4 +32,5 @@ export default NotesList;
 NotesList.propTypes = {
   listOfNote: propTypes.arrayOf.isRequired,
   displayListStateFalse: propTypes.func.isRequired,
+  deleteNote: propTypes.func.isRequired,
 };

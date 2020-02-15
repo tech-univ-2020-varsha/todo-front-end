@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 import propTypes from 'prop-types';
 
-function Button(props) {
+const Button = (props) => {
   const { name } = props;
   const { clickAction } = props;
   return (
@@ -12,7 +12,7 @@ function Button(props) {
       </button>
     </div>
   );
-}
+};
 
 export default Button;
 

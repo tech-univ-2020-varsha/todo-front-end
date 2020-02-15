@@ -3,17 +3,13 @@ import './index.css';
 import propTypes from 'prop-types';
 import Button from '../Button';
 
-function Note(props) {
-  const { noteContent, noteId, deleteNote } = props;
+const Note = ({ noteContent, noteId, deleteNote }) => (
+  <div className="note">
+    <div className="note-content">{noteContent}</div>
+    <Button name="DONE" clickAction={() => deleteNote(noteId)} />
+  </div>
 
-  return (
-    <div className="note">
-      <div className="note-content">{noteContent}</div>
-      <Button name="DONE" clickAction={() => deleteNote(noteId)} />
-    </div>
-
-  );
-}
+);
 
 export default Note;
 

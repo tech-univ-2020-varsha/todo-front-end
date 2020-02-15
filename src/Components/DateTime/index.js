@@ -1,29 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './index.css';
 
-class DateTime extends Component {
-  date = new Date();
+const DateTime = () => {
+  const date = new Date();
 
-  months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-   hour = this.date.getHours() - (this.date.getHours() >= 12 ? 12 : 0);
+  const hour = date.getHours() - (date.getHours() >= 12 ? 12 : 0);
 
-   period = this.date.getHours() >= 12 ? 'PM' : 'AM';
+  const period = date.getHours() >= 12 ? 'PM' : 'AM';
 
-   render() {
-     return (
-       <div className="date-time">
-         <div className="item">
-           {`${`${this.hour}:${this.date.getMinutes()} ${this.period}`}`}
-         </div>
-         <div className="item">
-           {
- `${this.date.getDate()} ${this.months[this.date.getMonth()]},${this.date.getFullYear()}`
+
+  return (
+    <div className="date-time">
+      <div className="item">
+        {`${`${hour}:${date.getMinutes()} ${period}`}`}
+      </div>
+      <div className="item">
+        {
+ `${date.getDate()} ${months[date.getMonth()]},${date.getFullYear()}`
         }
-         </div>
-       </div>
-     );
-   }
-}
+      </div>
+    </div>
+  );
+};
 
 export default DateTime;

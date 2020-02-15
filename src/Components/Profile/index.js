@@ -3,14 +3,12 @@ import Picture from '../Picture';
 import DateTime from '../DateTime';
 import './index.css';
 
-function Profile() {
-  return (
-    <div className="profile-bar">
-      <Picture />
-      <DateTime />
-    </div>
-  );
-}
+const Profile = () => (
+  <div className="profile-bar">
+    <Picture />
+    <DateTime />
+  </div>
+);
 
 
 export default Profile;

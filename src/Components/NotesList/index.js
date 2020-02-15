@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import Button from '../Button';
 import Note from '../Note';
 
-function NotesList(props) {
+const NotesList = (props) => {
   const { listOfNote } = props;
   const { deleteNote } = props;
   const createNewNote = () => {
@@ -17,14 +17,20 @@ function NotesList(props) {
       </div>
       <div className="notes-list" id="style-1">
         {
-          listOfNote.map((note) => <Note noteContent={note.description} noteId={note.id} deleteNote={deleteNote} />)
+          listOfNote.map((note) => (
+            <Note
+              noteContent={note.description}
+              noteId={note.id}
+              deleteNote={deleteNote}
+            />
+          ))
         }
 
       </div>
       <Button name="CREATE NEW" clickAction={createNewNote} />
     </div>
   );
-}
+};
 
 export default NotesList;
 

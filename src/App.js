@@ -1,80 +1,53 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import axios from 'axios';
 import Profile from './Components/Profile';
 import NotesList from './Components/NotesList';
 import CreateNote from './Components/CreateNote';
+import useNotes from './hooks/useNotes';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      displayList: true,
-      listOfNote: [],
-    };
+const App = () => {
+  const [listOfNote, setListOfNote] = useNotes();
+  const [displayList, setDisplayList] = useState(true);
 
-    this.displayListStateFalse = () => {
-      this.setState({
-        displayList: false,
-      });
-    };
-    this.displayListStateTrue = async (newNote) => {
-      const { listOfNote } = this.state;
-      // console.log([...notesData]);
-      this.setState({
-        displayList: true,
-        listOfNote: [newNote, ...listOfNote],
-      });
-    };
-  }
 
-  getNoteList=async () => {
-    const result = await axios.get('http://localhost:8080/notes');
-    return result.data;
-  }
+  const displayListStateFalse = () => {
+    setDisplayList(false);
+  };
+  const displayListStateTrue = async (newNote) => {
+    setDisplayList(true);
+    setListOfNote([newNote, ...listOfNote]);
+  };
 
-  deleteNote=async (noteId) => {
-    const { listOfNote } = this.state;
-    console.log(listOfNote);
+
+  const deleteNote = async (noteId) => {
     const deleteUrl = `http://localhost:8080/notes/${noteId}`;
     await axios.delete(deleteUrl);
-    this.setState({
-      displayList: true,
-      listOfNote: listOfNote.filter((note) => note.id !== noteId),
-    });
-  }
+    setDisplayList(true);
+    const list = listOfNote.filter((note) => note.id !== noteId);
+    setListOfNote(list);
+  };
 
-  componentDidMount=async () => {
-    const notesData = await this.getNoteList();
-    this.setState({
-      listOfNote: notesData,
-    });
-  }
+  return (
+    <div className="App">
 
-  render() {
-    const { displayList } = this.state;
-    const { listOfNote } = this.state;
-
-    return (
-      <div className="App">
-
-        <Profile />
-        {
+      <Profile />
+      {
          displayList === true
            ? (
              <NotesList
                displayList={displayList}
-               displayListStateFalse={this.displayListStateFalse}
+               displayListStateFalse={displayListStateFalse}
                listOfNote={listOfNote}
-               deleteNote={this.deleteNote}
+               deleteNote={deleteNote}
              />
            )
-           : <CreateNote displayListStateTrue={this.displayListStateTrue} />
+           : <CreateNote displayListStateTrue={displayListStateTrue} />
         }
 
-      </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
 
 export default App;

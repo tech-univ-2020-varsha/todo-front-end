@@ -1,36 +1,34 @@
 import React, { Component } from 'react';
 import './index.css';
 import propTypes from 'prop-types';
+import axios from 'axios';
 import Button from '../Button';
 
 class CreateNote extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      numOfChars: 0,
+      noteText: '',
     };
     this.countChar = (e) => {
       this.setState({
-        numOfChars: e.target.value.length,
+        noteText: e.target.value,
       });
     };
     this.addNote = async () => {
-      const newNote = document.getElementById('note-description').value;
+      const { noteText } = this.state;
+      const newNote = noteText;
       if (newNote) {
-        const http = new XMLHttpRequest();
-        const url = 'http://localhost:8080/notes';
-        const payload = {
-          title: 'new note',
-          description: newNote,
-        };
-        http.open('POST', url);
-        http.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-        http.onreadystatechange = () => { // Call a function when the state changes.
-          if (http.readyState === 4 && http.status === 200) {
-            props.displayListStateTrue(JSON.parse(http.responseText));
-          }
-        };
-        http.send(JSON.stringify(payload));
+        const result = await axios({
+          method: 'post',
+          url: 'http://localhost:8080/notes',
+          data: {
+            title: 'new note',
+            description: newNote,
+          },
+        });
+        console.log(result.data);
+        props.displayListStateTrue(result.data);
       } else {
         alert('Please fill the note content');
       }
@@ -39,7 +37,7 @@ class CreateNote extends Component {
 
 
   render() {
-    const { numOfChars } = this.state;
+    const { noteText } = this.state;
     return (
 
       <div className="New-Notes-bar">
@@ -47,10 +45,10 @@ class CreateNote extends Component {
           CREATE NEW NOTE
         </div>
         <div className="new-note">
-          <textarea type="text" className="note-text" onKeyUp={this.countChar} id="note-description" />
+          <textarea type="text" className="note-text" onKeyUp={this.countChar} />
         </div>
         <div className="num-of-chars">
-          {150 - numOfChars}
+          {150 - noteText.length}
           {' '}
           characters left
         </div>

@@ -4,16 +4,9 @@ import propTypes from 'prop-types';
 import Button from '../Button';
 
 function Note(props) {
-  const { noteContent } = props;
-  const { noteId } = props;
-  const { deleteNote } = props;
-  //   const doneAction = async () => {
-  //     const deleteUrl = `http://localhost:8080/notes/${noteId}`;
-  //     await axios.delete(deleteUrl);
-  //   };
+  const { noteContent, noteId, deleteNote } = props;
 
   return (
-
     <div className="note">
       <div className="note-content">{noteContent}</div>
       <Button name="DONE" clickAction={() => deleteNote(noteId)} />

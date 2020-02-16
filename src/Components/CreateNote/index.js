@@ -1,25 +1,16 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './index.css';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import Button from '../Button';
 
-const CreateNote = (props) => {
+const CreateNote = ({ setListOfNote, listOfNote }) => {
   const [noteText, setNoteText] = useState('');
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     noteText: '',
-  //   };
   const countChar = (e) => {
     setNoteText(e.target.value);
-    // this.setState({
-    //   noteText: e.target.value,
-    // });
   };
   const addNote = async () => {
-    // const { noteText } = this.state;
-    // const newNote = noteText;
     if (noteText) {
       const result = await axios({
         method: 'post',
@@ -29,8 +20,8 @@ const CreateNote = (props) => {
           description: noteText,
         },
       });
-      console.log(result.data);
-      props.displayListStateTrue(result.data);
+      const newNote = result.data;
+      setListOfNote([newNote, ...listOfNote]);
     } else {
       alert('Please fill the note content');
     }
@@ -38,7 +29,6 @@ const CreateNote = (props) => {
 
 
   return (
-
     <div className="New-Notes-bar">
       <div className="notes-title">
         CREATE NEW NOTE
@@ -51,7 +41,9 @@ const CreateNote = (props) => {
         {' '}
         characters left
       </div>
-      <Button name="SUBMIT" clickAction={addNote} />
+      <Link to="/">
+        <Button name="SUBMIT" clickAction={addNote} />
+      </Link>
     </div>
 
   );
@@ -60,5 +52,6 @@ const CreateNote = (props) => {
 export default CreateNote;
 
 CreateNote.propTypes = {
-  displayListStateTrue: propTypes.func.isRequired,
+  setListOfNote: propTypes.func.isRequired,
+  listOfNote: propTypes.arrayOf(propTypes.object).isRequired,
 };

@@ -3,7 +3,9 @@ import './index.css';
 import propTypes from 'prop-types';
 import Button from '../Button';
 
-const Note = ({ noteContent, noteId, deleteNote }) => (
+const Note = ({
+  noteContent, noteId, deleteNote,
+}) => (
   <div className="note">
     <div className="note-content">{noteContent}</div>
     <Button name="DONE" clickAction={() => deleteNote(noteId)} />

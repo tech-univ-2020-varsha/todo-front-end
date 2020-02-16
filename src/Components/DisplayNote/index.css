@@ -1,0 +1,38 @@
+.note-display-content{
+    padding-top:3em;
+    display: flex;
+    flex:2;
+    background: -webkit-linear-gradient(#FFF, #5cc8f3);
+    border-color:#5cc8f3 ;
+    /* height: 100%;
+    width: 100%; */
+    margin: 1rem;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    flex-direction: column;
+}
+
+.note-view-heading{
+    display: flex;
+    border-color:#5cc8f3 ;
+    align-items: center;
+    justify-content: center;
+    color: #5cc8f3;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.note-view-content{
+    background-color: #FFF;
+    width:80%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    padding:2rem;
+    overflow-y: scroll;
+    border-color: white;
+    border-style: solid;
+    margin: 1em;
+    color: #5cc8f3;
+}

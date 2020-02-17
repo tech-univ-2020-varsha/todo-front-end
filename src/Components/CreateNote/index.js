@@ -5,7 +5,7 @@ import propTypes from 'prop-types';
 import axios from 'axios';
 import Button from '../Button';
 
-const CreateNote = ({ setListOfNote, listOfNote }) => {
+const CreateNote = ({ setListOfNotes, listOfNotes }) => {
   const [noteText, setNoteText] = useState('');
   const countChar = (e) => {
     setNoteText(e.target.value);
@@ -21,7 +21,7 @@ const CreateNote = ({ setListOfNote, listOfNote }) => {
         },
       });
       const newNote = result.data;
-      setListOfNote([newNote, ...listOfNote]);
+      setListOfNotes([newNote, ...listOfNotes]);
     } else {
       alert('Please fill the note content');
     }
@@ -41,7 +41,7 @@ const CreateNote = ({ setListOfNote, listOfNote }) => {
         {' '}
         characters left
       </div>
-      <Link to="/">
+      <Link to="/" className="create-new-submit-btn">
         <Button name="SUBMIT" clickAction={addNote} />
       </Link>
     </div>
@@ -52,6 +52,6 @@ const CreateNote = ({ setListOfNote, listOfNote }) => {
 export default CreateNote;
 
 CreateNote.propTypes = {
-  setListOfNote: propTypes.func.isRequired,
-  listOfNote: propTypes.arrayOf(propTypes.object).isRequired,
+  setListOfNotes: propTypes.func.isRequired,
+  listOfNotes: propTypes.arrayOf(propTypes.object).isRequired,
 };

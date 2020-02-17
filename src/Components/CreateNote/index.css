@@ -49,3 +49,17 @@
     align-self: flex-end;
     padding-right: 1em;
 }
+
+.create-new-submit-btn{
+text-decoration: none;
+}
+
+.notes-title{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 2rem;
+    color: #5cc8f3 ;
+    font-size: 1.5em;
+    font-weight: bold;
+}

@@ -1,20 +1,20 @@
 import React from 'react';
-import './index.css';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import * as styles from './index.module.css';
 import Button from '../Button';
 import Note from '../Note';
 
-const NotesList = ({ listOfNote, deleteNote }) => {
+const NotesList = ({ listOfNotes, deleteNote }) => {
   const createNewNote = () => true;
   return (
-    <div className="Notes-bar">
-      <div className="notes-title">
+    <div className={styles.NotesBar}>
+      <div className={styles.notesTitle}>
         ALL TO-DOs
       </div>
-      <div className="notes-list" id="style-1">
+      <div className={styles.notesList} id={styles.style1}>
         {
-          listOfNote.map((note) => (
+          listOfNotes.map((note) => (
             <Note
               key={note.id}
               noteContent={note.description}
@@ -25,7 +25,7 @@ const NotesList = ({ listOfNote, deleteNote }) => {
         }
 
       </div>
-      <Link to="/new">
+      <Link to="/new" className={styles.createNewBtn}>
         <Button name="CREATE NEW" clickAction={createNewNote} />
       </Link>
 
@@ -37,6 +37,6 @@ export default NotesList;
 
 
 NotesList.propTypes = {
-  listOfNote: propTypes.arrayOf(propTypes.object).isRequired,
+  listOfNotes: propTypes.arrayOf(propTypes.object).isRequired,
   deleteNote: propTypes.func.isRequired,
 };

@@ -7,7 +7,7 @@ const useNotes = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get('http://localhost:8080/notes');
+        const result = await axios.get(`${process.env.REACT_APP_URL}`);
         setListOfNotes(result.data);
         console.log(result);
         setListLoadComplete(true);

@@ -12,9 +12,10 @@ const CreateNote = ({ setListOfNotes, listOfNotes }) => {
   };
   const addNote = async () => {
     if (noteText) {
-      const result = await axios({
+    
+      const result = await  axios({
         method: 'post',
-        url: 'http://localhost:8080/notes',
+        url:  `${process.env.REACT_APP_URL}`,
         data: {
           title: 'new note',
           description: noteText,
